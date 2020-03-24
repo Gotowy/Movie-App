@@ -14,16 +14,12 @@ class App extends Component {
 
   handleChange = e => {
     this.setState({ search: e.target.value });
+    window.scrollTo(0, 0);
   };
 
   clearSearching = () => {
     this.setState({ search: "" });
     document.querySelector("#search").value = "";
-  };
-
-  changeNeed = () => {
-    const trueOrFalse = this.state.need === false ? true : false;
-    this.setState({ need: trueOrFalse });
   };
 
   render() {
