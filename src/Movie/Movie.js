@@ -35,10 +35,10 @@ class Movie extends Component {
 
     axios.get(movieRequest).then(res => {
       const posterUrl = res.data.poster_path
-        ? `http://image.tmdb.org/t/p/w300/${res.data.poster_path}`
+        ? `https://image.tmdb.org/t/p/w300/${res.data.poster_path}`
         : "none";
       const backdropUrl = res.data.backdrop_path
-        ? `http://image.tmdb.org/t/p/original/${res.data.backdrop_path}`
+        ? `https://image.tmdb.org/t/p/original/${res.data.backdrop_path}`
         : "none";
       this.setState({
         movieInfo: res.data,
