@@ -9,12 +9,13 @@
 
 .container1 {
   min-height: calc(100vh - 176px);
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .container2 {
   display: flex;
   justify-content: space-between;
-  max-width: 1200px;
   padding: 30px;
 }
 
