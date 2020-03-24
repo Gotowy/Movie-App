@@ -1,0 +1,100 @@
+.results {
+  max-width: 1200px;
+  margin: auto;
+}
+
+select {
+  margin: 40px 10px 0 10px;
+  padding: 3px;
+  border: solid 2px #6af;
+  border-radius: 5px;
+  outline: none;
+  background: #012;
+  font-family: "Poppins";
+  color: #fff;
+  cursor: pointer;
+}
+
+select[disabled="true"] {
+  color: #012;
+  border-color: #146;
+}
+
+.grey {
+  color: #777;
+}
+
+select > option {
+  background: #012;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.movieList {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 30px;
+  justify-items: center;
+  min-height: calc(100vh - 277px);
+  margin: auto;
+  padding: 30px;
+  background: #012;
+}
+
+.noResults {
+  height: calc(100vh - 277px);
+  color: #ff3d;
+  text-align: center;
+  font-size: 32px;
+}
+
+.movie {
+  margin: 5px;
+  padding-bottom: 10px;
+  width: 185px;
+  height: 350px;
+  overflow: hidden;
+  border-radius: 5px;
+  background: #369; /*#259, 59f*/
+}
+
+.movie img {
+  height: 278px;
+  border-radius: 5px 5px 0 0;
+  display: block;
+}
+
+.score {
+  background: #111;
+  color: #ff3d;
+}
+
+.title {
+  min-height: 40px;
+  padding: 5px;
+  color: #fff;
+}
+
+.pages {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 30px auto;
+  width: 400px;
+}
+
+.page {
+  width: 24px;
+  height: 24px;
+}
+
+a {
+  color: #fff;
+}
+
+.active {
+  background: #111;
+  border: 1px solid #ff3d;
+  border-radius: 30%;
+  color: #ff3d;
+  font-weight: bold;
+}

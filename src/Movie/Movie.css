@@ -1,0 +1,137 @@
+.movieBackdrop {
+  height: calc(100vh - 104px);
+  background-size: cover;
+  background-color: #123;
+  background-blend-mode: overlay;
+  overflow: auto;
+  color: #fff;
+}
+
+.container1 {
+  min-height: calc(100vh - 176px);
+}
+
+.container2 {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  padding: 30px;
+}
+
+.moviePoster img {
+  margin: 10px 40px 0 0;
+  border-radius: 10px;
+}
+
+.centerPoster {
+  display: none;
+}
+
+.movieInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+}
+
+.movieHeader {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 32px;
+}
+
+.movieTitle {
+  font-family: "Righteous", "Poppins";
+}
+
+.movieYear {
+  color: #fffb;
+}
+
+.movieRuntime {
+  font-size: 16px;
+}
+
+.movieRating {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-family: "Righteous", "Poppins";
+  color: #ff3d;
+}
+
+.movieScore {
+  font-size: 48px;
+}
+
+.cast {
+  width: auto;
+  display: flex;
+  margin: 20px 0;
+}
+
+.member {
+  margin: 0 40px 0 0;
+}
+
+.buttons {
+  text-align: left;
+  padding: 0 0 30px 30px;
+}
+
+.buttons button {
+  width: 100px;
+  margin: 0 25px;
+  padding: 5px;
+  border-radius: 5px;
+  background: #111;
+  font-family: "Poppins";
+  cursor: pointer;
+  outline: none;
+}
+
+.buttons button:hover {
+  background: #222;
+}
+
+.returnButton {
+  border: solid 2px #6af;
+  color: #6af;
+}
+
+.imdbButton {
+  border: solid 2px #ff6;
+  color: #ff6;
+}
+
+@media screen and (max-width: 1200px) {
+  .movieList {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    width: 870px;
+  }
+
+  /*.movieBackdrop {
+    background-size: 1280px;
+  }*/
+}
+
+@media screen and (max-width: 960px) {
+  .movieList {
+    grid-template-columns: 1fr 1fr;
+    width: 420px;
+  }
+
+  .leftPoster {
+    display: none;
+  }
+  .centerPoster {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .movieList {
+    grid-template-columns: 1fr;
+    width: 200px;
+  }
+}
