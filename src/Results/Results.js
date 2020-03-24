@@ -12,7 +12,7 @@ class Results extends Component {
       discover: "https://api.themoviedb.org/3/discover/movie?",
       search: "https://api.themoviedb.org/3/search/movie?query=",
       genre: "https://api.themoviedb.org/3/genre/movie/list?",
-      poster: "http://image.tmdb.org/t/p/w185/"
+      poster: "https://image.tmdb.org/t/p/w185/"
     },
     requestType: "", //'discover' or 'search'
     page: "", //current result page
