@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/movie-app/static/css/main.8c601937.chunk.css",
-    "main.js": "/movie-app/static/js/main.7cb1c7bb.chunk.js",
-    "main.js.map": "/movie-app/static/js/main.7cb1c7bb.chunk.js.map",
-    "runtime-main.js": "/movie-app/static/js/runtime-main.8e14a1ed.js",
-    "runtime-main.js.map": "/movie-app/static/js/runtime-main.8e14a1ed.js.map",
-    "static/js/2.404984fe.chunk.js": "/movie-app/static/js/2.404984fe.chunk.js",
-    "static/js/2.404984fe.chunk.js.map": "/movie-app/static/js/2.404984fe.chunk.js.map",
-    "index.html": "/movie-app/index.html",
-    "precache-manifest.7c450ec39fe0494ef8bfb6ec7c9089fc.js": "/movie-app/precache-manifest.7c450ec39fe0494ef8bfb6ec7c9089fc.js",
-    "service-worker.js": "/movie-app/service-worker.js",
-    "static/css/main.8c601937.chunk.css.map": "/movie-app/static/css/main.8c601937.chunk.css.map",
-    "static/js/2.404984fe.chunk.js.LICENSE.txt": "/movie-app/static/js/2.404984fe.chunk.js.LICENSE.txt"
+    "main.css": "/netfilmoteka/static/css/main.ef7ee5b1.chunk.css",
+    "main.js": "/netfilmoteka/static/js/main.d595ba1c.chunk.js",
+    "main.js.map": "/netfilmoteka/static/js/main.d595ba1c.chunk.js.map",
+    "runtime-main.js": "/netfilmoteka/static/js/runtime-main.6490a679.js",
+    "runtime-main.js.map": "/netfilmoteka/static/js/runtime-main.6490a679.js.map",
+    "static/js/2.b2a13d83.chunk.js": "/netfilmoteka/static/js/2.b2a13d83.chunk.js",
+    "static/js/2.b2a13d83.chunk.js.map": "/netfilmoteka/static/js/2.b2a13d83.chunk.js.map",
+    "index.html": "/netfilmoteka/index.html",
+    "precache-manifest.25637837d27e9d40045acf425fcfb8a7.js": "/netfilmoteka/precache-manifest.25637837d27e9d40045acf425fcfb8a7.js",
+    "service-worker.js": "/netfilmoteka/service-worker.js",
+    "static/css/main.ef7ee5b1.chunk.css.map": "/netfilmoteka/static/css/main.ef7ee5b1.chunk.css.map",
+    "static/js/2.b2a13d83.chunk.js.LICENSE.txt": "/netfilmoteka/static/js/2.b2a13d83.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.8e14a1ed.js",
-    "static/js/2.404984fe.chunk.js",
-    "static/css/main.8c601937.chunk.css",
-    "static/js/main.7cb1c7bb.chunk.js"
+    "static/js/runtime-main.6490a679.js",
+    "static/js/2.b2a13d83.chunk.js",
+    "static/css/main.ef7ee5b1.chunk.css",
+    "static/js/main.d595ba1c.chunk.js"
   ]
 }
