@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
+import { connect } from "react-redux";
 import "./Movie.css";
 import err from "./error.png";
 import powered from "../powered-green.png";
@@ -13,7 +13,7 @@ class Movie extends Component {
     movieInfo: {},
     director: "",
     screenplay: "",
-    writer: ""
+    writer: "",
   };
 
   componentDidMount() {
@@ -23,17 +23,17 @@ class Movie extends Component {
       this.state.movieBaseUrl +
       id +
       "?" +
-      this.props.location.state.language +
-      this.props.location.state.apiKey;
+      this.props.language +
+      this.props.apiKey;
 
     const creditsRequest =
       this.state.movieBaseUrl +
       id +
       "/credits?" +
-      this.props.location.state.language +
-      this.props.location.state.apiKey;
+      this.props.language +
+      this.props.apiKey;
 
-    axios.get(movieRequest).then(res => {
+    axios.get(movieRequest).then((res) => {
       const posterUrl = res.data.poster_path
         ? `https://image.tmdb.org/t/p/w300/${res.data.poster_path}`
         : "none";
@@ -43,13 +43,13 @@ class Movie extends Component {
       this.setState({
         movieInfo: res.data,
         posterUrl,
-        backdropUrl
+        backdropUrl,
       });
     });
 
-    axios.get(creditsRequest).then(res => {
-      const name = job => {
-        const member = res.data.crew.find(cast => cast.job === job);
+    axios.get(creditsRequest).then((res) => {
+      const name = (job) => {
+        const member = res.data.crew.find((cast) => cast.job === job);
         return member ? member.name : "Nieznany";
       };
       const director = name("Director");
@@ -59,14 +59,14 @@ class Movie extends Component {
       this.setState({
         director,
         screenplay,
-        writer
+        writer,
       });
     });
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
-      this.props.history.push("/movie-app/");
+      this.props.history.push("/netfilmoteka/");
     }
   }
 
@@ -80,7 +80,7 @@ class Movie extends Component {
       <div
         className="movieBackdrop"
         style={{
-          backgroundImage: `url(${this.state.backdropUrl})`
+          backgroundImage: `url(${this.state.backdropUrl})`,
         }}
       >
         <div className="container1">
@@ -89,7 +89,7 @@ class Movie extends Component {
               <img
                 src={this.state.posterUrl}
                 alt={m.title}
-                onError={e => {
+                onError={(e) => {
                   e.target.onError = null;
                   e.target.src = err;
                 }}
@@ -114,7 +114,7 @@ class Movie extends Component {
                 <img
                   src={this.state.posterUrl}
                   alt={m.title}
-                  onError={e => {
+                  onError={(e) => {
                     e.target.onError = null;
                     e.target.src = err;
                   }}
@@ -154,13 +154,21 @@ class Movie extends Component {
             <a
               href={`https://www.imdb.com/title/${this.state.movieInfo.imdb_id}/`}
               target="_blank"
+              rel="noopener noreferrer"
             >
               <button className="imdbButton">Profil IMDB</button>
             </a>
 
-            <Link to="/movie-app/">
-              <button className="returnButton">Powrót</button>
-            </Link>
+            <button
+              className="returnButton"
+              onClick={() => {
+                this.props.location.key
+                  ? this.props.history.goBack()
+                  : this.props.history.push("/netfilmoteka/");
+              }}
+            >
+              Powrót
+            </button>
           </div>
         </div>
 
@@ -172,4 +180,11 @@ class Movie extends Component {
   }
 }
 
-export default Movie;
+const mapState = (state) => {
+  return {
+    apiKey: state.apiKey,
+    language: state.language,
+  };
+};
+
+export default connect(mapState)(Movie);

@@ -1,56 +1,60 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { connect } from "react-redux";
+import {
+  getMovieList,
+  getGenreList,
+  setGenre,
+  setSorting,
+  setPage,
+  resetApp,
+} from "../store/actions.js";
 import err from "./error.png";
-import "./Results.css";
 import powered from "../powered-green.png";
+import "./Results.css";
 
 class Results extends Component {
   state = {
+    requestType: "discover", //'discover' or 'search'
+    //genres: [],
+
     //BASIC URL ELEMENTS OF REQUEST
     baseUrl: {
       discover: "https://api.themoviedb.org/3/discover/movie?",
       search: "https://api.themoviedb.org/3/search/movie?query=",
       genre: "https://api.themoviedb.org/3/genre/movie/list?",
-      poster: "https://image.tmdb.org/t/p/w185/"
+      poster: "https://image.tmdb.org/t/p/w185/",
     },
-    requestType: "", //'discover' or 'search'
-    page: "", //current result page
+
     //URL ELEMENTS FOR DISCOVER REQUEST TYPE
-    sortingCriterium: {
+    sorting: {
       popularity: "&sort_by=vote_count.desc",
-      score: "&vote_count.gte=200&sort_by=vote_average.desc",
-      trendy: "&sort_by=popularity.desc"
+      score: "&vote_count.gte=550&sort_by=vote_average.desc",
+      trendy: "&sort_by=popularity.desc",
     },
-    sort: "&sort_by=vote_count.desc", //current sorting option
-    genre: "", //current genre filter
-    //LISTS OF REQUEST RESULTS
-    genres: [],
-    movies: [],
-    //PAGE VARIABLES
-    pageNumber: 1, //serves establishing an active class for link representing current page number
-    maxPages: 10, //SET MAXIMUM AMOUNT of pages for movies result (one page contains up to 20 movies)
-    pages: null //how many pages given result includes
   };
 
   getMovieList = () => {
+    const sorting = this.state.sorting[this.props.sorting];
+    const genre = `&with_genres=${this.props.genre.id}`;
+    const page = `&page=${this.props.page}`;
     let request = "";
 
     switch (this.state.requestType) {
       case "discover":
         request =
           this.state.baseUrl.discover +
-          this.state.genre +
-          this.state.sort +
-          this.state.page +
+          genre +
+          sorting +
+          page +
           this.props.language +
           this.props.apiKey;
         break;
       case "search":
         request =
           this.state.baseUrl.search +
-          this.props.search +
-          this.state.page +
+          this.props.search + //needs to be right after baseUrl variable
+          page +
           this.props.language +
           this.props.apiKey;
         break;
@@ -58,147 +62,134 @@ class Results extends Component {
         request = "";
         break;
     }
-
-    axios.get(request).then(res => {
-      const maxPages = this.state.maxPages;
-      const totalPages = res.data.total_pages;
-      const pages = totalPages >= maxPages ? maxPages : totalPages;
-
-      this.setState({ pages, movies: res.data.results });
-      this.addActive();
-    });
+    this.addActivePage();
+    this.props.getMovieList(request);
   };
 
   getGenreList = () => {
     const request =
       this.state.baseUrl.genre + this.props.language + this.props.apiKey;
-    axios.get(request).then(res => {
-      this.setState({ genres: res.data.genres });
-    });
+    this.props.getGenreList(request);
   };
 
-  selectGenre = e => {
-    const genre = `&with_genres=${e.target.selectedOptions[0].id}`;
-    this.removeActive();
+  selectGenre = (e) => {
+    const option = e.target.selectedOptions[0];
+    const genre = { id: option.id, name: option.value };
+    this.removeActivePage();
+    this.props.setGenre(genre);
+    this.props.setPage(1);
     this.setState(
       {
-        genre,
         requestType: "discover",
-        page: "&page=1",
-        pageNumber: 1
       },
-      () => this.getMovieList()
+      () => {
+        this.getMovieList();
+      }
     );
     this.props.clearSearching();
     document.querySelector(".genres").classList.remove("grey");
   };
 
-  sort = e => {
-    const sort = e.target.selectedOptions[0].value;
-    this.removeActive();
-    this.setState(
-      {
-        sort: this.state.sortingCriterium[sort],
-        page: "&page=1",
-        pageNumber: 1
-      },
-      () => this.getMovieList()
-    );
+  sort = (e) => {
+    const sorting = e.target.selectedOptions[0].value;
+    this.removeActivePage();
+    this.props.setSorting(sorting);
+    this.props.setPage(1);
+    setTimeout(() => this.getMovieList(), 0);
   };
 
-  getPage = number => {
-    const page = `&page=${number}`;
-    this.removeActive();
-    this.setState({ page, pageNumber: number }, () => {
+  getPage = (number) => {
+    this.removeActivePage();
+    this.props.setPage(number);
+    setTimeout(() => {
       this.getMovieList();
-    });
-    window.scrollTo(0, 0);
+      window.scrollTo(0, 0);
+    }, 0);
   };
 
-  addActive = () => {
-    const pageClass = `.page${this.state.pageNumber}`;
+  addActivePage = () => {
+    const pageClass = `.page${this.props.page}`;
     const page = document.querySelector(pageClass);
     if (page) page.classList.add("active");
   };
 
-  removeActive = () => {
-    const pageClass = `.page${this.state.pageNumber}`;
+  removeActivePage = () => {
+    const pageClass = `.page${this.props.page}`;
     const page = document.querySelector(pageClass);
     if (page) page.classList.remove("active");
   };
 
   componentDidMount() {
-    if (this.props.search === "") {
-      this.setState({ requestType: "discover" }, () => this.getMovieList());
-    } else {
-      this.setState(
-        {
-          requestType: "search"
-        },
-        () => this.getMovieList()
-      );
-      document.querySelector(".sort").setAttribute("disabled", true);
+    //The main logo clicked with Result component NOT mounted (discover request)
+    if (this.props.resetNeeded) this.props.resetApp();
+    //The main logo not clicked
+    else {
+      //Discover request
+      if (this.props.search === "") {
+        if (this.props.genre.name !== "Gatunek") {
+          document.querySelector(".genres").classList.remove("grey");
+          document.querySelector(".sorting").value = this.props.sorting;
+        }
+        //Search request
+      } else {
+        this.props.resetApp();
+        document.querySelector(".sorting").setAttribute("disabled", true);
+        this.setState({ requestType: "search" });
+      }
     }
-    this.getGenreList();
+    if (!this.props.genres.lenght) this.getGenreList();
+    if (!this.props.movies.lenght) setTimeout(() => this.getMovieList(), 0);
   }
 
   componentDidUpdate(prevProps) {
+    //The main logo clicked with Result component mounted (discover request)
+    if (this.props.resetNeeded) {
+      this.props.resetApp();
+      setTimeout(() => this.getMovieList(), 0);
+    }
+    //Changing input in the search bar
     if (prevProps.search !== this.props.search) {
-      this.removeActive();
-      if (this.props.search === "") {
-        this.setState(
-          {
-            requestType: "discover",
-            page: "&page=1",
-            pageNumber: 1
-          },
-          () => this.getMovieList()
-        );
-        document.querySelector(".sort").removeAttribute("disabled");
-      } else {
-        this.setState(
-          {
-            requestType: "search",
-            page: "&page=1",
-            pageNumber: 1,
-            genre: ""
-          },
-          () => this.getMovieList()
-        );
-        document.querySelector(".genres").value = "gatunek";
+      this.removeActivePage();
+      this.props.setPage(1);
+      //When the search bar gets empty
+      if (!this.props.search) {
+        this.setState({ requestType: "discover" });
+        document.querySelector(".sorting").removeAttribute("disabled");
+        document.querySelector(".sorting").value = this.props.sorting;
+        //When the search bar stops being empty
+      } else if (!prevProps.search) {
+        this.props.setGenre({ id: "", name: "Gatunek" });
+        this.setState({ requestType: "search" });
+        document.querySelector(".genres").value = "Gatunek";
         document.querySelector(".genres").classList.add("grey");
-        document.querySelector(".sort").setAttribute("disabled", true);
+        document.querySelector(".sorting").setAttribute("disabled", true);
+        this.props.setSorting("popularity");
       }
+      setTimeout(() => this.getMovieList(), 0);
     }
   }
 
   render() {
-    const { genres } = this.state;
-    const genreList = genres.map(genre => (
-      <option value={genre.name} key={genre.id} id={genre.id}>
-        {genre.name}
-      </option>
-    ));
+    const { genres } = this.props;
+    const genreList = genres.map((genre) => {
+      return (
+        <option value={genre.name} key={genre.id} id={genre.id}>
+          {genre.name}
+        </option>
+      );
+    });
 
-    const { movies } = this.state;
+    const { movies } = this.props;
     const movieList =
       movies.length || this.props.search === "" ? (
         <div className="movieList">
-          {movies.map(movie => {
-            const linkParameter = {
-              pathname: `/movie-app/movies/${movie.id}`,
-              state: {
-                search: this.props.search,
-                language: this.props.language,
-                apiKey: this.props.apiKey
-              }
-            };
+          {movies.map((movie) => {
             return (
               <div className="movie" key={movie.id} id={movie.id}>
-                <Link to={linkParameter}>
+                <Link to={`/netfilmoteka/movies/${movie.id}`}>
                   <img
                     alt={movie.title}
-                    onError={e => {
+                    onError={(e) => {
                       e.target.onError = null;
                       e.target.src = err;
                     }}
@@ -217,7 +208,9 @@ class Results extends Component {
                 </div>
 
                 <div className="title">
-                  <Link to={linkParameter}>{movie.title}</Link>
+                  <Link to={`/netfilmoteka/movies/${movie.id}`}>
+                    {movie.title}
+                  </Link>
                 </div>
               </div>
             );
@@ -230,13 +223,14 @@ class Results extends Component {
         </div>
       );
 
-    const { pages } = this.state;
+    const { pages } = this.props;
     const pageList = [];
     if (pages > 1) {
       for (let i = 1; i <= pages; i++) {
-        let classes = i === 1 ? `page page${i} active` : `page page${i}`;
+        let classes =
+          i === this.props.page ? `page page${i} active` : `page page${i}`;
         pageList.push(
-          <Link to={"/movie-app/"} key={i} onClick={() => this.getPage(i)}>
+          <Link to={"/netfilmoteka/"} key={i} onClick={() => this.getPage(i)}>
             <div className={classes}>{i}</div>
           </Link>
         );
@@ -249,17 +243,17 @@ class Results extends Component {
           <form>
             <select
               className="genres grey"
-              defaultValue="gatunek"
+              defaultValue={this.props.genre.name}
               onChange={this.selectGenre}
             >
-              <option value="gatunek" disabled hidden>
+              <option value="Gatunek" disabled hidden>
                 Gatunek
               </option>
               <option value="wszystkie">Wszystkie gatunki</option>
               {genreList}
             </select>
 
-            <select className="sort" onChange={this.sort}>
+            <select className="sorting" onChange={this.sort}>
               <option value="popularity">Najpopularniejsze</option>
               <option value="score">Najwyżej oceniane</option>
               <option value="trendy">Obecnie na czasie</option>
@@ -278,4 +272,29 @@ class Results extends Component {
   }
 }
 
-export default Results;
+const mapState = (state) => {
+  return {
+    apiKey: state.apiKey,
+    language: state.language,
+    movies: state.movies,
+    genres: state.genres,
+    genre: state.genre,
+    sorting: state.sorting,
+    page: state.page,
+    pages: state.pages,
+    resetNeeded: state.resetNeeded,
+  };
+};
+
+const mapDispatch = (dispatch) => {
+  return {
+    getMovieList: (request) => dispatch(getMovieList(request)),
+    getGenreList: (request) => dispatch(getGenreList(request)),
+    setGenre: (genre) => dispatch(setGenre(genre)),
+    setSorting: (sorting) => dispatch(setSorting(sorting)),
+    setPage: (page) => dispatch(setPage(page)),
+    resetApp: () => dispatch(resetApp()),
+  };
+};
+
+export default connect(mapState, mapDispatch)(Results);

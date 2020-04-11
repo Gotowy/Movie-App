@@ -2,17 +2,15 @@ import React, { Component } from "react";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import Results from "./Results/Results.js";
 import Movie from "./Movie/Movie.js";
-
-//import Redirector from "./Redirector/Redirector.js";
+import { connect } from "react-redux";
+import { callReset } from "./store/actions.js";
 
 class App extends Component {
   state = {
     search: "",
-    language: "&language=pl",
-    apiKey: process.env.REACT_APP_API_KEY
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({ search: e.target.value });
     window.scrollTo(0, 0);
   };
@@ -28,10 +26,11 @@ class App extends Component {
         <div className="app">
           <header>
             <Link
-              to="/movie-app/"
+              to="/netfilmoteka/"
               onClick={() => {
-                window.scrollTo(0, 0);
                 this.clearSearching();
+                this.props.callReset();
+                window.scrollTo(0, 0);
               }}
             >
               <div className="logo">
@@ -43,37 +42,32 @@ class App extends Component {
                 type="text"
                 id="search"
                 placeholder="Nazwa filmu..."
-                onChange={e => this.handleChange(e)}
+                onChange={(e) => this.handleChange(e)}
               ></input>
             </div>
           </header>
 
           <Route
             exact
-            path="/movie-app/"
+            path="/netfilmoteka/"
             render={() => (
               <Results
-                apiKey={this.state.apiKey}
-                language={this.state.language}
                 search={this.state.search}
                 clearSearching={this.clearSearching}
               />
             )}
           />
-          <Route
-            path="/movie-app/movies/:movie_id"
-            component={Movie}
-            /*render={() => (
-              <Movie
-                apiKey={this.state.apiKey}
-                language={this.state.language}
-              />
-            )}*/
-          />
+          <Route path="/netfilmoteka/movies/:movie_id" component={Movie} />
         </div>
       </BrowserRouter>
     );
   }
 }
 
-export default App;
+const mapDispatch = (dispatch) => {
+  return {
+    callReset: () => dispatch(callReset()),
+  };
+};
+
+export default connect(null, mapDispatch)(App);

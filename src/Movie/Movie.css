@@ -15,7 +15,7 @@
 
 .container2 {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 30px;
 }
 
