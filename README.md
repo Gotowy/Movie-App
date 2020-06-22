@@ -13,7 +13,7 @@ Google fonts<br />
 Font awsome<br />
 
 ## Functionality:
-The web site allows to browse movies existing in The Movie Database by part of name in multiple languages. There is also possibility of searching movies by genre or filter them by certain criterium and check for more details about chosen movie (including its IMDB profile). The project has implemented pagination and is responsive as well.
+The web site allows to browse movies figuring in The Movie Database by full or part of their names (multiple languages allowed). There is also possibility of searching movies by genre or filter them by certain criterium and check for more details about chosen movie in an individual component. The project has implemented pagination and is responsive.
 
 
 ## Status:
