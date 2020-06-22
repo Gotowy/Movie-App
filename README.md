@@ -1,6 +1,6 @@
 # netFilmoteka - movie browsing portal (under construction)
 
-netFilmoteka is a personal project where main purpose was to build a React application which uses a complex third part API in case to create some functional web site. While working on the project I also incorporated Redux because of reaching the point where dependencies between component states started to seem a little vailed. 
+netFilmoteka is a personal project where main purpose was to build a React application which uses a complex third part API in case to create some functional and useful web site. While working on the project I also incorporated Redux because of reaching the point where dependencies between component states started to seem a little vailed. 
 
 ## Built with:
 HTML i CSS (flex-box, grid, media queries)
