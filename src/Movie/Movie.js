@@ -50,21 +50,24 @@ class Movie extends Component {
       })
       .catch((err) => console.log(err));
 
-    axios.get(creditsRequest).then((res) => {
-      const name = (job) => {
-        const member = res.data.crew.find((cast) => cast.job === job);
-        return member ? member.name : "Nieznany";
-      };
-      const director = name("Director");
-      const screenplay = name("Screenplay");
-      const writer = name("Writer");
+    axios
+      .get(creditsRequest)
+      .then((res) => {
+        const name = (job) => {
+          const member = res.data.crew.find((cast) => cast.job === job);
+          return member ? member.name : "Nieznany";
+        };
+        const director = name("Director");
+        const screenplay = name("Screenplay");
+        const writer = name("Writer");
 
-      this.setState({
-        director,
-        screenplay,
-        writer,
-      });
-    });
+        this.setState({
+          director,
+          screenplay,
+          writer,
+        });
+      })
+      .catch((err) => console.log(err));
   }
 
   componentDidUpdate(prevProps) {
