@@ -240,29 +240,31 @@ class Results extends Component {
     return (
       <div>
         <div className="results">
-          <form>
-            <select
-              className="genres grey"
-              defaultValue={this.props.genre.name}
-              onChange={this.selectGenre}
-            >
-              <option value="Gatunek" disabled hidden>
-                Gatunek
-              </option>
-              <option value="wszystkie">Wszystkie gatunki</option>
-              {genreList}
-            </select>
+          <nav>
+            <form>
+              <select
+                className="genres grey"
+                defaultValue={this.props.genre.name}
+                onChange={this.selectGenre}
+              >
+                <option value="Gatunek" disabled hidden>
+                  Gatunek
+                </option>
+                <option value="wszystkie">Wszystkie gatunki</option>
+                {genreList}
+              </select>
 
-            <select className="sorting" onChange={this.sort}>
-              <option value="popularity">Najpopularniejsze</option>
-              <option value="score">Najwyżej oceniane</option>
-              <option value="trendy">Obecnie na czasie</option>
-            </select>
-          </form>
+              <select className="sorting" onChange={this.sort}>
+                <option value="popularity">Najpopularniejsze</option>
+                <option value="score">Najwyżej oceniane</option>
+                <option value="trendy">Obecnie na czasie</option>
+              </select>
+            </form>
+          </nav>
 
-          {movieList}
+          <main>{movieList}</main>
 
-          <div className="pages">{pageList}</div>
+          <nav className="pages">{pageList}</nav>
         </div>
         <footer>
           <img className="powered" src={powered} alt="powered"></img>

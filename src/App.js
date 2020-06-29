@@ -25,26 +25,28 @@ class App extends Component {
       <BrowserRouter>
         <div className="app">
           <header>
-            <Link
-              to="/netfilmoteka/"
-              onClick={() => {
-                this.clearSearching();
-                this.props.callReset();
-                window.scrollTo(0, 0);
-              }}
-            >
-              <div className="logo">
-                <span className="net">net</span>Filmoteka
+            <nav>
+              <Link
+                to="/netfilmoteka/"
+                onClick={() => {
+                  this.clearSearching();
+                  this.props.callReset();
+                  window.scrollTo(0, 0);
+                }}
+              >
+                <div className="logo">
+                  <span className="net">net</span>Filmoteka
+                </div>
+              </Link>
+              <div className="search">
+                <input
+                  type="text"
+                  id="search"
+                  placeholder="Nazwa filmu..."
+                  onChange={(e) => this.handleChange(e)}
+                ></input>
               </div>
-            </Link>
-            <div className="search">
-              <input
-                type="text"
-                id="search"
-                placeholder="Nazwa filmu..."
-                onChange={(e) => this.handleChange(e)}
-              ></input>
-            </div>
+            </nav>
           </header>
 
           <Route

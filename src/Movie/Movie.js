@@ -83,7 +83,7 @@ class Movie extends Component {
           backgroundImage: `url(${this.state.backdropUrl})`,
         }}
       >
-        <div className="container1">
+        <main className="container1">
           <div className="container2">
             <div className="moviePoster leftPoster">
               <img
@@ -170,7 +170,7 @@ class Movie extends Component {
               Powrót
             </button>
           </div>
-        </div>
+        </main>
 
         <footer>
           <img className="powered" src={powered} alt="powered"></img>
