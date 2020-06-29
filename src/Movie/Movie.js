@@ -33,19 +33,22 @@ class Movie extends Component {
       this.props.language +
       this.props.apiKey;
 
-    axios.get(movieRequest).then((res) => {
-      const posterUrl = res.data.poster_path
-        ? `https://image.tmdb.org/t/p/w300/${res.data.poster_path}`
-        : "none";
-      const backdropUrl = res.data.backdrop_path
-        ? `https://image.tmdb.org/t/p/original/${res.data.backdrop_path}`
-        : "none";
-      this.setState({
-        movieInfo: res.data,
-        posterUrl,
-        backdropUrl,
-      });
-    });
+    axios
+      .get(movieRequest)
+      .then((res) => {
+        const posterUrl = res.data.poster_path
+          ? `https://image.tmdb.org/t/p/w300/${res.data.poster_path}`
+          : "none";
+        const backdropUrl = res.data.backdrop_path
+          ? `https://image.tmdb.org/t/p/original/${res.data.backdrop_path}`
+          : "none";
+        this.setState({
+          movieInfo: res.data,
+          posterUrl,
+          backdropUrl,
+        });
+      })
+      .catch((err) => console.log(err));
 
     axios.get(creditsRequest).then((res) => {
       const name = (job) => {
