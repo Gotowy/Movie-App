@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/netfilmoteka/static/css/main.ef7ee5b1.chunk.css",
-    "main.js": "/netfilmoteka/static/js/main.20569ea6.chunk.js",
-    "main.js.map": "/netfilmoteka/static/js/main.20569ea6.chunk.js.map",
-    "runtime-main.js": "/netfilmoteka/static/js/runtime-main.6490a679.js",
-    "runtime-main.js.map": "/netfilmoteka/static/js/runtime-main.6490a679.js.map",
-    "static/js/2.b2a13d83.chunk.js": "/netfilmoteka/static/js/2.b2a13d83.chunk.js",
-    "static/js/2.b2a13d83.chunk.js.map": "/netfilmoteka/static/js/2.b2a13d83.chunk.js.map",
+    "main.js": "/netfilmoteka/static/js/main.f0dd6cc9.chunk.js",
+    "main.js.map": "/netfilmoteka/static/js/main.f0dd6cc9.chunk.js.map",
+    "runtime-main.js": "/netfilmoteka/static/js/runtime-main.aab9956f.js",
+    "runtime-main.js.map": "/netfilmoteka/static/js/runtime-main.aab9956f.js.map",
+    "static/js/2.bf400bff.chunk.js": "/netfilmoteka/static/js/2.bf400bff.chunk.js",
+    "static/js/2.bf400bff.chunk.js.map": "/netfilmoteka/static/js/2.bf400bff.chunk.js.map",
     "index.html": "/netfilmoteka/index.html",
-    "precache-manifest.80ccd7bbaa7b8cf5585c06fa291f4fdf.js": "/netfilmoteka/precache-manifest.80ccd7bbaa7b8cf5585c06fa291f4fdf.js",
+    "precache-manifest.3d2c2af7aef413558340df292e606500.js": "/netfilmoteka/precache-manifest.3d2c2af7aef413558340df292e606500.js",
     "service-worker.js": "/netfilmoteka/service-worker.js",
     "static/css/main.ef7ee5b1.chunk.css.map": "/netfilmoteka/static/css/main.ef7ee5b1.chunk.css.map",
-    "static/js/2.b2a13d83.chunk.js.LICENSE.txt": "/netfilmoteka/static/js/2.b2a13d83.chunk.js.LICENSE.txt"
+    "static/js/2.bf400bff.chunk.js.LICENSE.txt": "/netfilmoteka/static/js/2.bf400bff.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.6490a679.js",
-    "static/js/2.b2a13d83.chunk.js",
+    "static/js/runtime-main.aab9956f.js",
+    "static/js/2.bf400bff.chunk.js",
     "static/css/main.ef7ee5b1.chunk.css",
-    "static/js/main.20569ea6.chunk.js"
+    "static/js/main.f0dd6cc9.chunk.js"
   ]
 }
