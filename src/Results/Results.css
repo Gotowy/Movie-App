@@ -20,6 +20,12 @@ select[disabled="true"] {
   border-color: #146;
 }
 
+.disabled {
+  pointer-events: none;
+  color: #012;
+  border-color: #146;
+}
+
 .grey {
   color: #777;
 }
