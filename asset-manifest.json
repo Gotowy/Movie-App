@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/netfilmoteka/static/css/main.b8ed6758.chunk.css",
-    "main.js": "/netfilmoteka/static/js/main.df49a526.chunk.js",
-    "main.js.map": "/netfilmoteka/static/js/main.df49a526.chunk.js.map",
+    "main.js": "/netfilmoteka/static/js/main.a4f4072f.chunk.js",
+    "main.js.map": "/netfilmoteka/static/js/main.a4f4072f.chunk.js.map",
     "runtime-main.js": "/netfilmoteka/static/js/runtime-main.aab9956f.js",
     "runtime-main.js.map": "/netfilmoteka/static/js/runtime-main.aab9956f.js.map",
     "static/js/2.bf400bff.chunk.js": "/netfilmoteka/static/js/2.bf400bff.chunk.js",
     "static/js/2.bf400bff.chunk.js.map": "/netfilmoteka/static/js/2.bf400bff.chunk.js.map",
     "index.html": "/netfilmoteka/index.html",
-    "precache-manifest.dc0d8fcbda3c60a66eee8c2e2bb7b1fc.js": "/netfilmoteka/precache-manifest.dc0d8fcbda3c60a66eee8c2e2bb7b1fc.js",
+    "precache-manifest.e471fe047a29ceb7fe67675e2cb1bfbd.js": "/netfilmoteka/precache-manifest.e471fe047a29ceb7fe67675e2cb1bfbd.js",
     "service-worker.js": "/netfilmoteka/service-worker.js",
     "static/css/main.b8ed6758.chunk.css.map": "/netfilmoteka/static/css/main.b8ed6758.chunk.css.map",
     "static/js/2.bf400bff.chunk.js.LICENSE.txt": "/netfilmoteka/static/js/2.bf400bff.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.aab9956f.js",
     "static/js/2.bf400bff.chunk.js",
     "static/css/main.b8ed6758.chunk.css",
-    "static/js/main.df49a526.chunk.js"
+    "static/js/main.a4f4072f.chunk.js"
   ]
 }

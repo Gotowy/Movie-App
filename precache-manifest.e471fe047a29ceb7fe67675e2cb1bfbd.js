@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e60460483fd851526a05769d4e292eef",
+    "revision": "fbd746ae82c18f502c02f77627faa443",
     "url": "/netfilmoteka/index.html"
   },
   {
-    "revision": "a0cc84fb65038c2ce78f",
+    "revision": "23d153ad9525a3a04e1f",
     "url": "/netfilmoteka/static/css/main.b8ed6758.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/netfilmoteka/static/js/2.bf400bff.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "a0cc84fb65038c2ce78f",
-    "url": "/netfilmoteka/static/js/main.df49a526.chunk.js"
+    "revision": "23d153ad9525a3a04e1f",
+    "url": "/netfilmoteka/static/js/main.a4f4072f.chunk.js"
   },
   {
     "revision": "ba5fe5de3c3aec974578",
