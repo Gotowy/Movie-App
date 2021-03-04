@@ -133,7 +133,8 @@ class Results extends Component {
         //Search request
       } else {
         this.props.resetApp();
-        document.querySelector(".sorting").setAttribute("disabled", true);
+        //document.querySelector(".sorting").setAttribute("disabled", true);
+        document.querySelector(".sorting").classList.add("disabled"); //instead of the line of code above
         this.setState({ requestType: "search" });
       }
     }
@@ -154,7 +155,8 @@ class Results extends Component {
       //When the search bar gets empty
       if (!this.props.search) {
         this.setState({ requestType: "discover" });
-        document.querySelector(".sorting").removeAttribute("disabled");
+        //document.querySelector(".sorting").removeAttribute("disabled");
+        document.querySelector(".sorting").classList.remove("disabled"); //instead of the line of code above
         document.querySelector(".sorting").value = this.props.sorting;
         //When the search bar stops being empty
       } else if (!prevProps.search) {
@@ -162,7 +164,8 @@ class Results extends Component {
         this.setState({ requestType: "search" });
         document.querySelector(".genres").value = "Gatunek";
         document.querySelector(".genres").classList.add("grey");
-        document.querySelector(".sorting").setAttribute("disabled", true);
+        //document.querySelector(".sorting").setAttribute("disabled", true);
+        document.querySelector(".sorting").classList.add("disabled"); //instead of the line of code above
         this.props.setSorting("popularity");
       }
       setTimeout(() => this.getMovieList(), 0);
@@ -196,7 +199,7 @@ class Results extends Component {
                     src={
                       movie.poster_path
                         ? this.state.baseUrl.poster + movie.poster_path
-                        : "error"
+                        : err
                     }
                   />
                 </Link>

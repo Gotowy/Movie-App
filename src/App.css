@@ -52,6 +52,8 @@ header {
   font-size: 36px;
   color: #ddd;
   cursor: pointer;
+  z-index: 100;
+  display: relative;
 }
 
 .net {
@@ -85,4 +87,8 @@ footer {
   height: 50px;
 
   border-radius: 10px;
+}
+
+.notFound {
+  color: #fff;
 }

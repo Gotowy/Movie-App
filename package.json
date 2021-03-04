@@ -1,6 +1,6 @@
 {
-  "homepage": "https://Gotowy.github.io/netfilmoteka/",
-  "name": "netFilmoteka",
+  "homepage": "https://gotowy.github.io/netfilmoteka/",
+  "name": "netfilmoteka",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

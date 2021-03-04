@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 import Results from "./Results/Results.js";
 import Movie from "./Movie/Movie.js";
+import NotFound from "./NotFound.js";
 import { connect } from "react-redux";
 import { callReset } from "./store/actions.js";
 
@@ -49,17 +50,20 @@ class App extends Component {
             </nav>
           </header>
 
-          <Route
-            exact
-            path="/netfilmoteka/"
-            render={() => (
-              <Results
-                search={this.state.search}
-                clearSearching={this.clearSearching}
-              />
-            )}
-          />
-          <Route path="/netfilmoteka/movies/:movie_id" component={Movie} />
+          <Switch>
+            <Route
+              exact
+              path="/netfilmoteka/"
+              render={() => (
+                <Results
+                  search={this.state.search}
+                  clearSearching={this.clearSearching}
+                />
+              )}
+            />
+            <Route path="/netfilmoteka/movies/:movie_id" component={Movie} />
+            <Route path="*" component={NotFound} />
+          </Switch>
         </div>
       </BrowserRouter>
     );

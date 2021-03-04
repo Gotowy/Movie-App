@@ -33,35 +33,41 @@ class Movie extends Component {
       this.props.language +
       this.props.apiKey;
 
-    axios.get(movieRequest).then((res) => {
-      const posterUrl = res.data.poster_path
-        ? `https://image.tmdb.org/t/p/w300/${res.data.poster_path}`
-        : "none";
-      const backdropUrl = res.data.backdrop_path
-        ? `https://image.tmdb.org/t/p/original/${res.data.backdrop_path}`
-        : "none";
-      this.setState({
-        movieInfo: res.data,
-        posterUrl,
-        backdropUrl,
-      });
-    });
+    axios
+      .get(movieRequest)
+      .then((res) => {
+        const posterUrl = res.data.poster_path
+          ? `https://image.tmdb.org/t/p/w300/${res.data.poster_path}`
+          : "none";
+        const backdropUrl = res.data.backdrop_path
+          ? `https://image.tmdb.org/t/p/original/${res.data.backdrop_path}`
+          : "none";
+        this.setState({
+          movieInfo: res.data,
+          posterUrl,
+          backdropUrl,
+        });
+      })
+      .catch((err) => console.log(err.message));
 
-    axios.get(creditsRequest).then((res) => {
-      const name = (job) => {
-        const member = res.data.crew.find((cast) => cast.job === job);
-        return member ? member.name : "Nieznany";
-      };
-      const director = name("Director");
-      const screenplay = name("Screenplay");
-      const writer = name("Writer");
+    axios
+      .get(creditsRequest)
+      .then((res) => {
+        const name = (job) => {
+          const member = res.data.crew.find((cast) => cast.job === job);
+          return member ? member.name : "Nieznany";
+        };
+        const director = name("Director");
+        const screenplay = name("Screenplay");
+        const writer = name("Writer");
 
-      this.setState({
-        director,
-        screenplay,
-        writer,
-      });
-    });
+        this.setState({
+          director,
+          screenplay,
+          writer,
+        });
+      })
+      .catch((err) => console.log(err.message));
   }
 
   componentDidUpdate(prevProps) {
@@ -75,14 +81,12 @@ class Movie extends Component {
     const year = new Date(m.release_date).getFullYear();
     const hours = Math.floor(m.runtime / 60);
     const minutes = m.runtime - hours * 60;
+    const background = this.state.backdropUrl
+      ? { backgroundImage: `url(${this.state.backdropUrl})` }
+      : { background: "transparent" };
 
     return (
-      <div
-        className="movieBackdrop"
-        style={{
-          backgroundImage: `url(${this.state.backdropUrl})`,
-        }}
-      >
+      <div className="movieBackdrop" style={background}>
         <main className="container1">
           <div className="container2">
             <div className="moviePoster leftPoster">
